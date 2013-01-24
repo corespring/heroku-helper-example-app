@@ -1,0 +1,26 @@
+{
+   "repos":[
+      {
+         "name":"heroku-helper-example-app",
+         "gitRemoteName" : "heroku",
+         "push":{
+            "cmd" : "git push ${gitRemote} ${branch}:master",
+            "before":[
+               "deployment/heroku/push/before/run.sh"
+            ],
+            "after":[
+               "deployment/heroku/push/after/run.sh"
+            ]
+         },
+         "rollback":{
+            "cmd" : "goodbye",
+            "before":[
+               "deployment/heroku/rollback/before/run.sh"
+            ],
+            "after":[
+               "deployment/heroku/rollback/after/run.sh"
+            ]
+         }
+      }
+   ]
+}
