@@ -1,5 +1,5 @@
 {
-   "repos":[
+   "appConfigs":[
       {
          "name":"heroku-helper-example-app",
          "gitRemoteName" : "heroku",
@@ -13,7 +13,30 @@
             ]
          },
          "rollback":{
-            "cmd" : "goodbye",
+            "cmd" : "heroku releases:rollback ${version} --app ${app}",
+            "before":[
+               "deployment/heroku/rollback/before/run.sh"
+            ],
+            "after":[
+               "deployment/heroku/rollback/after/run.sh"
+            ]
+         }
+      },
+
+       {
+         "name":"hh-example-staging",
+         "gitRemoteName" : "hh-example-staging",
+         "push":{
+            "cmd" : "git push ${gitRemote} ${branch}:master",
+            "before":[
+               "deployment/heroku/push/before/run.sh"
+            ],
+            "after":[
+               "deployment/heroku/push/after/run.sh"
+            ]
+         },
+         "rollback":{
+            "cmd" : "heroku releases:rollback ${version} --app ${app}",
             "before":[
                "deployment/heroku/rollback/before/run.sh"
             ],
